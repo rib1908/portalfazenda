@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  backend:
+    build: ./
+    ports:
+      - "3038:80"
+    restart: always   
+    networks:
+      - rede_nova
+networks:
+  rede_nova:
+    name: rede_nova
+    external: true
