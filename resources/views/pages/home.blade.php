@@ -15,7 +15,7 @@
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
     <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css') }}" rel="stylesheet" />
 
-    <style>        
+    <style>
         .footer {
             position: fixed;
             bottom: 1px;
@@ -48,10 +48,60 @@
         @yield('content')
     </div>
 
-    <div class="container-fluid" style="width: 80%">
+    <div class="container-fluid" style="width: 90%">
         <div class="card mb-6 text-center">
 
-                      EM BREVE PORTAL DA FAZENDA
+            <div style="padding-left: 10%; padding-top: 2%; padding-right: 10%; padding-bottom: 2%">
+                <div class="row row-cols-1 row-cols-md-4 g-4">
+
+                    <div class="col">
+                        <div class="card h-100">
+                            <a href="{{route('atualizacadastro.index')}}">
+                                <img src="{{asset('img/brasão.png')}}" style="width: 50%;align-self: center;padding-top:2%" alt="icone">
+                                <div class="card-body">
+                                    <h5 class="card-title">Atualize Seus Dados</h5>
+                                    {{-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> --}}
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="{{asset('img/brasão.png')}}" style="width: 50%;align-self: center;padding-top:2%" alt="icone">
+                            <div class="card-body">
+                                <h5 class="card-title">Em Breve</h5>
+                                {{-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> --}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="{{asset('img/brasão.png')}}" style="width: 50%;align-self: center;padding-top:2%" alt="icone">
+                            <div class="card-body">
+                                <h5 class="card-title">Em Breve</h5>
+                                {{-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> --}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="{{asset('img/brasão.png')}}" style="width: 50%;align-self: center;padding-top:2%" alt="icone">
+                            <div class="card-body">
+                                <h5 class="card-title">Em Breve</h5>
+                                {{-- <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> --}}
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+
+
+            </div>
         </div>
     </div>
 

@@ -9,12 +9,15 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ChangePassword;            
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AtualizaCadastroController;
 
             
-Route::get('/', 			[HomeController::class, 'index']);
+Route::get('/', 			[HomeController::class, 'index'])->name('inicio');
 
 Route::get('/login',  [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
+
+Route::get('atualizacaocadastral', [AtualizaCadastroController::class, 'index'])->name('atualizacadastro.index');
 
 Route::group(['middleware' => 'auth'], function () {
 
