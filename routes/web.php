@@ -18,6 +18,8 @@ Route::get('/login',  [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
 
 Route::get('atualizacaocadastral', [AtualizaCadastroController::class, 'index'])->name('atualizacadastro.index');
+Route::post('atualizacaocadastral', [AtualizaCadastroController::class, 'store']);
+Route::get('atualizacaosucesso', [AtualizaCadastroController::class, 'sucesso']);
 
 Route::group(['middleware' => 'auth'], function () {
 

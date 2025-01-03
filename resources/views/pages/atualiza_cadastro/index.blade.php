@@ -62,7 +62,10 @@
                 <div style="font-weight: bold;font-size: 13px;color: red">
                     Campos com * são obrigatórios
                 </div>
-                <form onsubmit="return submitForm(this);" action="{{ url('/declaracao') }}" method="post">
+
+                {{-- https://qrco.de/IPTU2023 --}}
+                {{-- https://egov.mesquita.rj.gov.br/ --}}
+                <form onsubmit="return submitForm(this);" action="{{ url('/atualizacaocadastral') }}" method="post">
                     {{ csrf_field() }}
                     {{-- <h5 class="text-uppercase">IDENTIFICAÇÃO DO DECLARANTE</h5> --}}
                     <div class="row">
@@ -90,7 +93,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">* Data de Nascimento:</label>
-                                <input class="form-control" value="{{ old('data_nascimento') }}" type="text" name="data_nascimento"
+                                <input class="form-control" value="{{ old('data_nascimento') }}" placeholder="xx/xx/xxxx" type="text" name="data_nascimento"
                                     id="data_nascimento" required>
                             </div>
                         </div>
@@ -98,7 +101,7 @@
                             <div class="form-group">
                                 <label for="celular" class="form-control-label">* Celular</label>
                                 <input class="form-control" type="text" name="celular"
-                                    id="celular" required>
+                                    id="celular" value="{{old('celular')}}" placeholder="(xx)xxxxx-xxxx" required>
                             </div>
                         </div>
                         
@@ -115,31 +118,38 @@
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">* CEP</label>
                                 <input class="form-control" value="{{ old('cep') }}" type="text"
-                                    name="cep" id="cep" required>
+                                    name="cep" id="cep" onblur="pesquisacep(this.value);" required>
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">* Logradouro</label>
                                 <input class="form-control" value="{{ old('rua') }}" type="text"
-                                    name="rua" id="rua" required>
+                                    name="rua" id="rua" required readonly>
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">* Bairro</label>
                                 <input class="form-control" value="{{ old('bairro') }}" type="text"
-                                    name="bairro" id="bairro" required>
+                                    name="bairro" id="bairro" required readonly>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">* Municipio</label>
                                 <input class="form-control" value="{{ old('municipio') }}" type="text"
-                                    name="municipio" id="municipio" required>
+                                    name="municipio" id="municipio" required readonly>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="example-text-input" class="form-control-label">* Estado</label>
+                                <input class="form-control" value="{{ old('estado') }}" type="text"
+                                    name="estado" id="estado" required readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">* Numero</label>
                                 <input class="form-control" value="{{ old('numero') }}" type="text"
@@ -219,16 +229,110 @@
 <script src="{{ asset('assets/js/vanillaMasker.min.js') }}"></script>
 
 <script>
-    $(window).on('load', function() {
-   
-        swal({
-        title: "Estamos passando por manutenção, Retornaremos em Breve!",
-        }).then((result) => {
-    
-            window.location.href = "{{route('inicio')}}";
-        
-        });
-    });
 
+        VMasker ($("#cpf")).maskPattern("999.999.999-99");
+        VMasker ($("#data_nascimento")).maskPattern("99/99/9999");
+        VMasker ($("#celular")).maskPattern("(99)99999-9999");
+        VMasker ($("#telefone_fixo")).maskPattern("(99)9999-9999");
+        VMasker ($("#rg")).maskPattern("99.999.999-9");
+    // $(window).on('load', function() {
+   
+    //     swal({
+    //     title: "Estamos passando por manutenção, Retornaremos em Breve!",
+    //     }).then((result) => {
     
+    //         window.location.href = "{{route('inicio')}}";
+        
+    //     });
+    // });
+
+    function submitForm(form) {
+    // Obtem o valor do CEP e remove caracteres não numéricos
+    const cep = document.getElementById('cep').value.replace(/\D/g, '');
+    const rua = document.getElementById('rua').value.trim();
+    const bairro = document.getElementById('bairro').value.trim();
+    const municipio = document.getElementById('municipio').value.trim();
+    const estado = document.getElementById('estado').value.trim();
+
+    // Verifica se o CEP está no formato válido
+    const validacep = /^[0-9]{8}$/;
+    if (!validacep.test(cep)) {
+        alert("Por favor, insira um CEP válido.");
+        return false; // Impede o envio do formulário
+    }
+
+    // Verifica se os campos de endereço estão preenchidos
+    if (!rua || !bairro || !municipio || !estado) {
+        alert("Por favor, complete os campos de endereço antes de enviar.");
+        return false; // Impede o envio do formulário
+    }
+
+    return true; // Permite o envio do formulário
+}
+
+</script>
+
+<script>
+    function limpa_formulário_cep() {
+    //Limpa valores do formulário de cep.
+    document.getElementById('rua').value=("");
+    document.getElementById('bairro').value=("");
+    document.getElementById('municipio').value=("");
+    document.getElementById('estado').value=("");
+    }
+
+    function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            document.getElementById('rua').value=(conteudo.logradouro);
+            document.getElementById('bairro').value=(conteudo.bairro);
+            document.getElementById('municipio').value=(conteudo.localidade);
+            document.getElementById('estado').value=(conteudo.uf);
+        } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+        
+    function pesquisacep(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('rua').value="...";
+                document.getElementById('bairro').value="...";
+
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor
+            limpa_formulário_cep();
+        }
+    };
 </script>

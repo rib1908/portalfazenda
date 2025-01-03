@@ -24,5 +24,6 @@ class AtualizaCadastro extends Model
         'municipio',
         'numero',
         'complemento',
+        'estado',
     ];
 }
