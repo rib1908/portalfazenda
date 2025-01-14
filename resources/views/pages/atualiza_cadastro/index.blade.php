@@ -39,6 +39,7 @@
             {{-- <a href="{{ asset('assets/pdf/manual-de-utilizacao.pdf') }}" target="_blank" class="btn btn-primary">Manual
                 de Utilização
             </a> --}}
+            {{-- aaa --}}
         </div>
     </nav>
 
@@ -48,7 +49,7 @@
         @yield('content')
     </div>
 
-  
+
 
     <div class="container-fluid" style="width: 80%">
         <div class="card mb-6">
@@ -104,7 +105,7 @@
                                     id="celular" value="{{old('celular')}}" placeholder="(xx)xxxxx-xxxx" required>
                             </div>
                         </div>
-                        
+
 
                         <div class="col-md-4">
                             <div class="form-group">
@@ -236,13 +237,13 @@
         VMasker ($("#telefone_fixo")).maskPattern("(99)9999-9999");
         VMasker ($("#rg")).maskPattern("99.999.999-9");
     // $(window).on('load', function() {
-   
+
     //     swal({
     //     title: "Estamos passando por manutenção, Retornaremos em Breve!",
     //     }).then((result) => {
-    
+
     //         window.location.href = "{{route('inicio')}}";
-        
+
     //     });
     // });
 
@@ -295,7 +296,7 @@
             alert("CEP não encontrado.");
         }
     }
-        
+
     function pesquisacep(valor) {
 
         //Nova variável "cep" somente com dígitos.
