@@ -25,5 +25,11 @@ class AtualizaCadastro extends Model
         'numero',
         'complemento',
         'estado',
+
+        'estado_civil',
+        'dono_aquisicao',
+        'ano_aquisicao',
+        'residentes_extras',
+        'herdeiros',
     ];
 }

@@ -94,15 +94,16 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">* Data de Nascimento:</label>
-                                <input class="form-control" value="{{ old('data_nascimento') }}" placeholder="xx/xx/xxxx" type="text" name="data_nascimento"
-                                    id="data_nascimento" required>
+                                <input class="form-control" value="{{ old('data_nascimento') }}"
+                                    placeholder="xx/xx/xxxx" type="text" name="data_nascimento" id="data_nascimento"
+                                    required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="celular" class="form-control-label">* Celular</label>
-                                <input class="form-control" type="text" name="celular"
-                                    id="celular" value="{{old('celular')}}" placeholder="(xx)xxxxx-xxxx" required>
+                                <input class="form-control" type="text" name="celular" id="celular"
+                                    value="{{ old('celular') }}" placeholder="(xx)xxxxx-xxxx" required>
                             </div>
                         </div>
 
@@ -114,6 +115,23 @@
                                     name="nome_mae" id="nome_mae" required>
                             </div>
                         </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="EstadoCivil" class="form-control-label">Estado Civil</label>
+                                <select class="form-control" name="EstadoCivil" id="EstadoCivil">
+                                    <option value="" selected>Selecione</option>
+                                    <option value="Solteiro">Solteiro(a)</option>
+                                    <option value="Casado">Casado(a)</option>
+                                    <option value="Divorciado">Divorciado(a)</option>
+                                    <option value="Viúvo">Viúvo(a)</option>
+                                    <option value="Separado">Separado(a)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <p style="text-align: center"> Dados do imóvel</p>
 
                         <div class="col-md-2">
                             <div class="form-group">
@@ -162,6 +180,47 @@
                                 <label for="example-text-input" class="form-control-label"> Complemento</label>
                                 <input class="form-control" value="{{ old('complemento') }}" type="text"
                                     name="complemento" id="complemento">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="AnoAquisicao" class="form-control-label">Ano de aquisição do
+                                    imóvel</label>
+                                <input class="form-control" value="{{ old('AnoAquisicao') }}" type="number"
+                                    name="AnoAquisicao" id="AnoAquisicao" min="1900" max="2099"
+                                    step="1" placeholder="Ex: 2024">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="NomeAquisicao" class="form-control-label">Nome de quem adquiriu o
+                                    imóvel</label>
+                                <input class="form-control" value="{{ old('NomeAquisicao') }}" type="text"
+                                    name="NomeAquisicao" id="NomeAquisicao">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="residentes_extras" class="form-control-label">Há outros moradores?</label>
+                                <select class="form-control" name="residentes_extras" id="residentes_extras">
+                                    <option value="" selected>Selecione</option>
+                                    <option value="Sim">sim</option>
+                                    <option value="Nao">Não</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="herdeiros" class="form-control-label">Possui hedeiros??</label>
+                                <select class="form-control" name="herdeiros" id="herdeiros">
+                                    <option value="" selected>Selecione</option>
+                                    <option value="Sim">sim</option>
+                                    <option value="Nao">Não</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -230,65 +289,63 @@
 <script src="{{ asset('assets/js/vanillaMasker.min.js') }}"></script>
 
 <script>
-
-        VMasker ($("#cpf")).maskPattern("999.999.999-99");
-        VMasker ($("#data_nascimento")).maskPattern("99/99/9999");
-        VMasker ($("#celular")).maskPattern("(99)99999-9999");
-        VMasker ($("#telefone_fixo")).maskPattern("(99)9999-9999");
-        VMasker ($("#rg")).maskPattern("99.999.999-9");
+    VMasker($("#cpf")).maskPattern("999.999.999-99");
+    VMasker($("#data_nascimento")).maskPattern("99/99/9999");
+    VMasker($("#celular")).maskPattern("(99)99999-9999");
+    VMasker($("#telefone_fixo")).maskPattern("(99)9999-9999");
+    VMasker($("#rg")).maskPattern("99.999.999-9");
     // $(window).on('load', function() {
 
     //     swal({
     //     title: "Estamos passando por manutenção, Retornaremos em Breve!",
     //     }).then((result) => {
 
-    //         window.location.href = "{{route('inicio')}}";
+    //         window.location.href = "{{ route('inicio') }}";
 
     //     });
     // });
 
     function submitForm(form) {
-    // Obtem o valor do CEP e remove caracteres não numéricos
-    const cep = document.getElementById('cep').value.replace(/\D/g, '');
-    const rua = document.getElementById('rua').value.trim();
-    const bairro = document.getElementById('bairro').value.trim();
-    const municipio = document.getElementById('municipio').value.trim();
-    const estado = document.getElementById('estado').value.trim();
+        // Obtem o valor do CEP e remove caracteres não numéricos
+        const cep = document.getElementById('cep').value.replace(/\D/g, '');
+        const rua = document.getElementById('rua').value.trim();
+        const bairro = document.getElementById('bairro').value.trim();
+        const municipio = document.getElementById('municipio').value.trim();
+        const estado = document.getElementById('estado').value.trim();
 
-    // Verifica se o CEP está no formato válido
-    const validacep = /^[0-9]{8}$/;
-    if (!validacep.test(cep)) {
-        alert("Por favor, insira um CEP válido.");
-        return false; // Impede o envio do formulário
+        // Verifica se o CEP está no formato válido
+        const validacep = /^[0-9]{8}$/;
+        if (!validacep.test(cep)) {
+            alert("Por favor, insira um CEP válido.");
+            return false; // Impede o envio do formulário
+        }
+
+        // Verifica se os campos de endereço estão preenchidos
+        if (!rua || !bairro || !municipio || !estado) {
+            alert("Por favor, complete os campos de endereço antes de enviar.");
+            return false; // Impede o envio do formulário
+        }
+
+        return true; // Permite o envio do formulário
     }
-
-    // Verifica se os campos de endereço estão preenchidos
-    if (!rua || !bairro || !municipio || !estado) {
-        alert("Por favor, complete os campos de endereço antes de enviar.");
-        return false; // Impede o envio do formulário
-    }
-
-    return true; // Permite o envio do formulário
-}
-
 </script>
 
 <script>
     function limpa_formulário_cep() {
-    //Limpa valores do formulário de cep.
-    document.getElementById('rua').value=("");
-    document.getElementById('bairro').value=("");
-    document.getElementById('municipio').value=("");
-    document.getElementById('estado').value=("");
+        //Limpa valores do formulário de cep.
+        document.getElementById('rua').value = ("");
+        document.getElementById('bairro').value = ("");
+        document.getElementById('municipio').value = ("");
+        document.getElementById('estado').value = ("");
     }
 
     function meu_callback(conteudo) {
         if (!("erro" in conteudo)) {
             //Atualiza os campos com os valores.
-            document.getElementById('rua').value=(conteudo.logradouro);
-            document.getElementById('bairro').value=(conteudo.bairro);
-            document.getElementById('municipio').value=(conteudo.localidade);
-            document.getElementById('estado').value=(conteudo.uf);
+            document.getElementById('rua').value = (conteudo.logradouro);
+            document.getElementById('bairro').value = (conteudo.bairro);
+            document.getElementById('municipio').value = (conteudo.localidade);
+            document.getElementById('estado').value = (conteudo.uf);
         } //end if.
         else {
             //CEP não Encontrado.
@@ -309,17 +366,17 @@
             var validacep = /^[0-9]{8}$/;
 
             //Valida o formato do CEP.
-            if(validacep.test(cep)) {
+            if (validacep.test(cep)) {
 
                 //Preenche os campos com "..." enquanto consulta webservice.
-                document.getElementById('rua').value="...";
-                document.getElementById('bairro').value="...";
+                document.getElementById('rua').value = "...";
+                document.getElementById('bairro').value = "...";
 
                 //Cria um elemento javascript.
                 var script = document.createElement('script');
 
                 //Sincroniza com o callback.
-                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+                script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
 
                 //Insere script no documento e carrega o conteúdo.
                 document.body.appendChild(script);
@@ -336,4 +393,15 @@
             limpa_formulário_cep();
         }
     };
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    Swal.fire({
+        title: 'Aviso!',
+        text: 'Este é um alerta simples com SweetAlert.',
+        icon: 'info',
+        confirmButtonText: 'OK'
+    });
 </script>
