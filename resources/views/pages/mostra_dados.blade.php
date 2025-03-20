@@ -59,16 +59,37 @@
 
                 </tr>
             </thead>
-            @foreach ($findCadastro as $cadastro)
-                <tbody>
+            <tbody>
+                @foreach ($findCadastro as $index => $cadastro)
                     <tr>
-                        <th >{{$cadastro->nome}}</th>
-                        <td>{{$cadastro->email}}</td>
-                        <td>{{$cadastro->cpf}}</td>
-                        <td></td>
+                        <td>{{ $cadastro->nome }}</td>
+                        <td>{{ $cadastro->email }}</td>
+                        <td>{{ $cadastro->cpf }}</td>
+                        <td>
+                            <button class="btn btn-info btn-sm" data-bs-toggle="collapse" data-bs-target="#collapseRow{{ $index }}">
+                                mais info
+                            </button>
+                        </td>
                     </tr>
-                </tbody>
-            @endforeach
+                    <tr id="collapseRow{{ $index }}" class="collapse">
+                        <td colspan="4">
+                            <div class="card card-body">
+                                <strong>Mais Informações:</strong>
+                                <p>Data Nascimento: {{ $cadastro->data_nascimento ?? 'N/A' }}</p>
+                                <p>Cel: {{ $cadastro->celular ?? 'N/A' }}</p>
+                                <p>Nome da Mãe: {{ $cadastro->nome_mae ?? 'N/A' }}</p>
+                                <p>CEP: {{ $cadastro->cep ?? 'N/A' }}</p>
+                                <p>Endereço: {{ $cadastro->rua  ?? 'N/A' }}, {{$cadastro->bairro}}, {{$cadastro->municipio}}, {{$cadastro->numero}}, {{$cadastro->complemento}}, {{$cadastro->estado}} </p>
+                                <p>Estado Civil: {{ $cadastro->estado_civil ?? 'N/A' }}</p>
+                                <p>Dono Aquisição: {{ $cadastro->dono_aquisicao ?? 'N/A' }}</p>
+                                <p>Ano Aquisição: {{ $cadastro->ano_aquisicao ?? 'N/A' }}</p>
+                                <p>Residentes Extras: {{ $cadastro->residentes_extras ?? 'N/A' }}</p>
+                                <p>Possui Herdeiros: {{ $cadastro->herdeiros ?? 'N/A' }}</p>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
 
 
