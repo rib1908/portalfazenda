@@ -7,11 +7,11 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
-use App\Http\Controllers\ChangePassword;            
+use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AtualizaCadastroController;
 
-            
+
 Route::get('/', 			[HomeController::class, 'index'])->name('inicio');
 
 Route::get('/login',  [LoginController::class, 'show'])->name('login');
@@ -23,8 +23,8 @@ Route::get('atualizacaosucesso', [AtualizaCadastroController::class, 'sucesso'])
 
 Route::group(['middleware' => 'auth'], function () {
 
-	
-	Route::get('/home', 			[HomeController::class, 'home'])->name('home');
+
+	Route::get('/home', 			[HomeController::class, 'home'])->name('mostra.dados');
 	Route::post('logout', 			[LoginController::class, 'logout'])->name('logout');
 
 	Route::get('/register', 		[RegisterController::class, 'create'])->name('register');

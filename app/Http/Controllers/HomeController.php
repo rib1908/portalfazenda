@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EnviaProtocolo;
+use App\Models\AtualizaCadastro;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Inscricao;
@@ -23,10 +24,11 @@ class HomeController extends Controller
         return view('pages.home');
     }
 
-    public function home()
+    public function home(Request $request)
     {
-        
-        // return view('pages.home');
+
+        $findCadastro = AtualizaCadastro::all();
+         return view('pages.mostra_dados', compact('findCadastro'));
     }
 
     public function show()
@@ -38,13 +40,13 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
-       
+
     }
 
 
     public function sucesso($protocolo)
     {
-        
+
 
         return view('pages.inscricao.sucesso');
     }
