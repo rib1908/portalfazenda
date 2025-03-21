@@ -26,6 +26,16 @@
             font-size: 12px;
 
         }
+
+        .btn {
+            background-color: rgb(74, 14, 172);
+            color: white;
+        }
+
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+        }
     </style>
 </head>
 
@@ -49,13 +59,19 @@
     </div>
 
     <div class="container-fluid" style="width: 90%">
-        <table class="table table-striped table-hover">
+        <div class="card-header" style="margin-bottom: -26px">
+            <h6 class="text-center">Todos os dados</h6>
+            <hr class="horizontal dark my-3">
+        </div>
+
+        <table class="table table-striped table-hover ">
 
             <thead>
                 <tr>
                     <th>Nome</th>
                     <th>E-mail</th>
                     <th>CPF</th>
+                    <th></th>
 
                 </tr>
             </thead>
@@ -66,8 +82,9 @@
                         <td>{{ $cadastro->email }}</td>
                         <td>{{ $cadastro->cpf }}</td>
                         <td>
-                            <button class="btn btn-info btn-sm" data-bs-toggle="collapse" data-bs-target="#collapseRow{{ $index }}">
-                                mais info
+                            <button class="btn btn-sm" data-bs-toggle="collapse"
+                                data-bs-target="#collapseRow{{ $index }} ">
+                                +
                             </button>
                         </td>
                     </tr>
@@ -79,7 +96,9 @@
                                 <p>Cel: {{ $cadastro->celular ?? 'N/A' }}</p>
                                 <p>Nome da Mãe: {{ $cadastro->nome_mae ?? 'N/A' }}</p>
                                 <p>CEP: {{ $cadastro->cep ?? 'N/A' }}</p>
-                                <p>Endereço: {{ $cadastro->rua  ?? 'N/A' }}, {{$cadastro->bairro}}, {{$cadastro->municipio}}, {{$cadastro->numero}}, {{$cadastro->complemento}}, {{$cadastro->estado}} </p>
+                                <p>Endereço: {{ $cadastro->rua ?? 'N/A' }}, {{ $cadastro->bairro }},
+                                    {{ $cadastro->municipio }}, {{ $cadastro->numero }},
+                                    {{ $cadastro->complemento }}, {{ $cadastro->estado }} </p>
                                 <p>Estado Civil: {{ $cadastro->estado_civil ?? 'N/A' }}</p>
                                 <p>Dono Aquisição: {{ $cadastro->dono_aquisicao ?? 'N/A' }}</p>
                                 <p>Ano Aquisição: {{ $cadastro->ano_aquisicao ?? 'N/A' }}</p>
@@ -91,8 +110,6 @@
                 @endforeach
             </tbody>
         </table>
-
-
     </div>
 
 
